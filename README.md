@@ -21,7 +21,8 @@ i already use Pathogen, because it easy to use for me .
 9. cscope 
 
 // Note : need copy gentags file into your Linux machine at /usr/local/bin/ 
-// ===how to use gentags file ====
+===how to use gentags file ====
+
 assuming that your directory workplace is /home/giann/working/ 
 
 => cd /home/giann/working/
