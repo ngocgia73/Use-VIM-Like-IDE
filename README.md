@@ -1,5 +1,7 @@
-How to use vim like IDE
+======================How to use vim like IDE========================
+
 ![Screenshot](use_vim_like_IDE_giann.png)
+
 The vi editor is a very powerful tool and when you use it with plugin you can use vim like a IDE to code any
 programming you want. 
 
