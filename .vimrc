@@ -30,6 +30,9 @@ call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
 call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
 call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 
+" show hidden files
+let NERDTreeShowHidden=1
+
 "set runtimepath^=~/.vim/bundle/ctrlp.vim
 set runtimepath+=~/.vim/bundle/fzf
 
@@ -118,11 +121,11 @@ nmap <F8> :tabNext<CR>
 " for seach file"
 nmap <C-c> :Files<CR>
 
+
 " show number line of code
 set number
 
 " configure tab space
-set smartindent
 set tabstop=4
 set shiftwidth=4
 set expandtab
@@ -151,3 +154,42 @@ let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
 " :GitGutterDisable
 " :GitGutterEnable
 " :GitGutterToggle
+
+
+" youcompleteme
+" for backup: let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/youcompleteme/third_party/ycmd/examples/.ycm_extra_conf.py'
+"let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+"set runtimepath+=~/.vim/bundle/youcompleteme
+
+"set encoding=utf-8
+"let g:ycm_use_clangd = 1
+
+
+" smart tab
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+
+
+" fix wrong strange chracter
+let &t_TI = ""
+let &t_TE = ""
+
+set backspace=indent,eol,start " backspace over everything in insert mode
+
+
+" search pattern
+"command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
+nmap <C-s> :Rg<CR>
+
+" supertab key
+"let g:SuperTabDefaultCompletionType = "<c-n>"
