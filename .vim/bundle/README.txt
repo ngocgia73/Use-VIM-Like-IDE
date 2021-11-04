@@ -1,5 +1,7 @@
 https://www.embeddedarm.com/blog/tag-jumping-in-a-codebase-using-ctags-and-cscope-in-vim/
-
+$wget http://cscope.sourceforge.net/cscope_maps.vim
+$sudo apt-get install ctags
+$sudo apt-get install cscope
 
 #
 # how to install youcompleteme with pathogen
